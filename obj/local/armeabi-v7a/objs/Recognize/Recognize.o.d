@@ -93,7 +93,9 @@
  /cygdrive/f/OpenCV-android-sdk\sdk\native\jni\/include/opencv2/videoio/videoio_c.h \
  /cygdrive/f/OpenCV-android-sdk\sdk\native\jni\/include/opencv2/ml.hpp \
  /cygdrive/f/adt-bundle-windows-x86_64-20140702/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/map \
- /cygdrive/f/adt-bundle-windows-x86_64-20140702/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/iostream
+ /cygdrive/f/adt-bundle-windows-x86_64-20140702/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/iostream \
+ /cygdrive/f/OpenCV-android-sdk\sdk\native\jni\/include/opencv/cv.h \
+ /cygdrive/f/OpenCV-android-sdk\sdk\native\jni\/include/opencv/highgui.h
 
 /cygdrive/f/adt-bundle-windows-x86_64-20140702/android-ndk-r10e/platforms/android-8/arch-arm/usr/include/jni.h:
 
@@ -282,3 +284,7 @@
 /cygdrive/f/adt-bundle-windows-x86_64-20140702/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/map:
 
 /cygdrive/f/adt-bundle-windows-x86_64-20140702/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/iostream:
+
+/cygdrive/f/OpenCV-android-sdk\sdk\native\jni\/include/opencv/cv.h:
+
+/cygdrive/f/OpenCV-android-sdk\sdk\native\jni\/include/opencv/highgui.h:

@@ -21,12 +21,14 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 public class MainActivity extends Activity implements CvCameraViewListener2 {
 	
 	private static final String    TAG = "GestureRecognition";
 	private CameraBridgeViewBase   mOpenCvCameraView;
 	private Mat                    mCamera;
+	private TextView               textView;
 	
 	//OpenCV类库加载并初始化成功后的回调函数，在此我们不进行任何操作
     private BaseLoaderCallback  mLoaderCallback = new BaseLoaderCallback(this) {
@@ -53,10 +55,13 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.cameraView);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
+        
+        textView=(TextView)findViewById(R.id.textView1);
     }
     
     public void onClick(View v){
-    	
+    	int result=Recognize(mCamera.nativeObj);
+    	textView.setText("Result: "+result);
     }
     
     @Override
@@ -80,18 +85,24 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 	@Override
 	public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
 		// TODO Auto-generated method stub
-		int w = inputFrame.rgba().width(), h = inputFrame.rgba().height();
-		Bitmap bmp=Bitmap.createBitmap(w, h, Config.RGB_565);
-		Utils.matToBitmap(inputFrame.rgba(), bmp);
-		int[] pix = new int[w * h];
-		bmp.getPixels(pix, 0, w, 0, 0, w, h);
-		int[] resultInt = Recognize(pix, w, h);
-		Bitmap resultImg = Bitmap.createBitmap(w, h, Config.RGB_565);
-		resultImg.setPixels(resultInt, 0, w, 0, 0, w, h);
-		Mat mat=new Mat();
-		Utils.bitmapToMat(resultImg, mat);
+//		int w = inputFrame.rgba().width(), h = inputFrame.rgba().height();
+//		Bitmap bmp=Bitmap.createBitmap(w, h, Config.RGB_565);
+//		Utils.matToBitmap(inputFrame.rgba(), bmp);
+//		int[] pix = new int[w * h];
+//		bmp.getPixels(pix, 0, w, 0, 0, w, h);
+//		int[] resultInt = Recognize(pix, w, h);
+//		Bitmap resultImg = Bitmap.createBitmap(w, h, Config.RGB_565);
+//		resultImg.setPixels(resultInt, 0, w, 0, 0, w, h);
+//		Mat mat=new Mat();
+//		Utils.bitmapToMat(resultImg, mat);
+//		
+//		return mat;
 		
-		return mat;
+		
+		
+		mCamera=inputFrame.rgba();
+		
+		return mCamera;
 	}
 
 	@Override
@@ -106,5 +117,6 @@ public class MainActivity extends Activity implements CvCameraViewListener2 {
 		mCamera.release();
 	}
 	
-	public native int[] Recognize(int[] buf, int w, int h);
+	//public native int[] Recognize(int[] buf, int w, int h);
+	public native int Recognize(long matPtr);
 }
