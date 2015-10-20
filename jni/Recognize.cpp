@@ -12,6 +12,7 @@ IplImage * change4channelTo3InIplImage(IplImage * src);
 #include <highgui.h>
 
 #include <vector>
+#include <android/log.h>
 using namespace std;
 
 CvSize newSize;
@@ -399,14 +400,15 @@ JNIEXPORT /*jintArray*/jint JNICALL Java_com_example_gesturerecognition_MainActi
 	Mat* mat = (Mat*)matPtr;
 	IplImage src(*mat);
 
-	double scale = 0.5;
+	//double scale = 0.5;
+	double scale = 1;
 
 	//获得图像大小
 	sz = cvGetSize(&src);
 	newSize.height = (int)(sz.height * scale);
 	newSize.width = (int)(sz.width * scale);
 
-	sz = newSize;
+	//sz = newSize;
 
 	tmp1 = cvCreateImage(sz, IPL_DEPTH_8U, 1);
 
@@ -431,8 +433,12 @@ JNIEXPORT /*jintArray*/jint JNICALL Java_com_example_gesturerecognition_MainActi
 
 	src1 = cvCreateImage(sz, IPL_DEPTH_8U, 3);
 
+	__android_log_print(ANDROID_LOG_INFO, "JNIMsg", "src %d",src.depth);
+	__android_log_print(ANDROID_LOG_INFO, "JNIMsg", "src1 %d",src1->depth);
+
 	//缩小要处理的图像(减小运算量)
-	//cvResize(&src, src1, CV_INTER_LINEAR);
+	cvResize(&src, src1, CV_INTER_LINEAR);
+	//src1=&src;
 
 	cvPyrMeanShiftFiltering(src1, src2, pmsf_value, 40, 2);
 
